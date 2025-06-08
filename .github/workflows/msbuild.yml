@@ -33,7 +33,7 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
 
-    - name: "Download submodules"
+    - name: Download submodules
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: git submodule update --init
     
@@ -47,7 +47,9 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: premake/premake5.exe vs2022
 
-
+    - name: Restore NuGet packages
+      run: dotnet restore
+    
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
