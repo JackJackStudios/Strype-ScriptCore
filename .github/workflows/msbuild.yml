@@ -21,7 +21,7 @@ env:
   BUILD_CONFIGURATION: Release
 
 permissions:
-  contents: read
+  contents: write, read
 
 jobs:
   build:
@@ -30,6 +30,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Authenticate GH CLI
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+    
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
 
