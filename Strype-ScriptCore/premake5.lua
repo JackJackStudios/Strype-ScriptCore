@@ -7,8 +7,8 @@ project "Strype-ScriptCore"
 	language "C#"
 	dotnetframework "net8.0"
 	clr "Unsafe"
-    targetdir("../bin/%{cfg.buildcfg}")
-    objdir("../bin/%{cfg.buildcfg}/int")
+    targetdir("../bin")
+    objdir("../bin")
 
 	links {
 		"Coral.Managed"
