@@ -64,7 +64,7 @@ jobs:
         gh release delete --cleanup-tag --yes "latest" || true
 
         sleep 15
-        gh release create "latest" --target "main" --title "Latest Auto-Build" Strype-ScriptCore/*
+        gh release create "latest" --target "main" --title "Latest Auto-Build" Strype-ScriptCore/*.cs
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
