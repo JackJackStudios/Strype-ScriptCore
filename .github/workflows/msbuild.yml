@@ -50,6 +50,6 @@ jobs:
       run: |
         gh release delete --cleanup-tag --yes "latest" || true
         sleep 15
-        gh release create "latest" --target "main" --title "Latest Auto-Build" Strype-ScriptCore/premake5.lua
+        gh release create "latest" --target "main" --title "Latest Auto-Build" Strype-ScriptCore/bin/net8.0/*.dll
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
