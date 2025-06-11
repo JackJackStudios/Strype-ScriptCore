@@ -28,9 +28,6 @@ jobs:
     - name: Authenticate GH CLI
       run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
 
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
-
     - name: Download submodules
       run: git submodule update --init
 
@@ -53,6 +50,6 @@ jobs:
       run: |
         gh release delete --cleanup-tag --yes "latest" || true
         sleep 15
-        gh release create "latest" --target "main" --title "Latest Auto-Build" Strype-ScriptCore/*
+        gh release create "latest" --target "main" --title "Latest Auto-Build" Strype-ScriptCore/premake5.lua
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
