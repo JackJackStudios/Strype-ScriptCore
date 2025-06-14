@@ -40,9 +40,6 @@ jobs:
     - name: Run Premake for solution files
       run: premake/premake5.exe vs2022
 
-    - name: Restore NuGet packages
-      run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
-
     - name: Build with MSBuild
       shell: pwsh
       run: |
@@ -63,14 +60,7 @@ jobs:
           exit 1
         }
         Write-Host "Using MSBuild at $msbuildPath"
-        & $msbuildPath $env:SOLUTION_FILE_PATH /p:Configuration=$env:BUILD_CONFIGURATION /m
-
-    - name: Build with MSBuild
-      run: |
-        "${{ steps.find-msbuild.outputs.msbuild_path }}" ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /m
-  
-    - name: List build outputs
-      run: dir Strype-ScriptCore\Strype-ScriptCore\bin\${{ env.BUILD_CONFIGURATION }}\net8.0\
+        & $msbuildPath $env:SOLUTION_FILE_PATH /p:Configuration=$env:BUILD_CONFIGURATION /m /t:restore,build
 
     - name: Update Latest
       run: |
