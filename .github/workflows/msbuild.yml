@@ -60,7 +60,7 @@ jobs:
           exit 1
         }
         Write-Host "Using MSBuild at $msbuildPath"
-        & $msbuildPath $env:SOLUTION_FILE_PATH /p:Configuration=$env:BUILD_CONFIGURATION /m /t:restore,build
+        & $msbuildPath $env:SOLUTION_FILE_PATH /-property:Configuration=$env:BUILD_CONFIGURATION -t:restore,build
 
     - name: Update Latest
       run: |
