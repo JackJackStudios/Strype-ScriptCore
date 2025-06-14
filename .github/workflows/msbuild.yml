@@ -43,13 +43,27 @@ jobs:
     - name: Restore NuGet packages
       run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
 
-    - name: Find MSBuild path
-      id: find-msbuild
+    - name: Build with MSBuild
+      shell: pwsh
       run: |
-        echo "Looking for MSBuild..."
-        msbuildPath=$(vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)
-        echo "MSBuild found at: $msbuildPath"
-        echo "msbuild_path=$msbuildPath" >> $GITHUB_OUTPUT
+        $paths = @(
+          "C:\Program Files\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe",
+          "C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe",
+          "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
+        )
+        $msbuildPath = $null
+        foreach ($p in $paths) {
+          if (Test-Path $p) {
+            $msbuildPath = $p
+            break
+          }
+        }
+        if (-not $msbuildPath) {
+          Write-Error "MSBuild.exe not found on known paths."
+          exit 1
+        }
+        Write-Host "Using MSBuild at $msbuildPath"
+        & $msbuildPath $env:SOLUTION_FILE_PATH /p:Configuration=$env:BUILD_CONFIGURATION /m
 
     - name: Build with MSBuild
       run: |
