@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  SOLUTION_FILE_PATH: .
+  SOLUTION_FILE_PATH: Strype-ScriptCore.sln  # or your actual solution file path
   BUILD_CONFIGURATION: Release
 
 permissions:
@@ -41,15 +41,18 @@ jobs:
       run: premake/premake5.exe vs2022
 
     - name: Restore NuGet packages
-      run: dotnet restore
+      run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
 
-    - name: Build
-      run: dotnet build ${{env.SOLUTION_FILE_PATH}} --configuration ${{env.BUILD_CONFIGURATION}} --no-restore
+    - name: Build with MSBuild
+      run: msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /m
+
+    - name: List build outputs
+      run: dir Strype-ScriptCore\Strype-ScriptCore\bin\${{ env.BUILD_CONFIGURATION }}\net8.0\
 
     - name: Update Latest
       run: |
         gh release delete --cleanup-tag --yes "latest" || true
         sleep 15
-        gh release create "latest" --target "main" --title "Latest Auto-Build" C:\a\Strype-ScriptCore\Strype-ScriptCore\bin\net8.0\Coral.Managed.dll C:\a\Strype-ScriptCore\Strype-ScriptCore\bin\net8.0\Strype-ScriptCore.dll
+        gh release create "latest" --target "main" --title "Latest Auto-Build" Strype-ScriptCore\Strype-ScriptCore\bin\${{ env.BUILD_CONFIGURATION }}\net8.0\Coral.Managed.dll Strype-ScriptCore\Strype-ScriptCore\bin\${{ env.BUILD_CONFIGURATION }}\net8.0\Strype-ScriptCore.dll
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
