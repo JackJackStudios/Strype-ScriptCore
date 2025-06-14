@@ -43,9 +43,18 @@ jobs:
     - name: Restore NuGet packages
       run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
 
-    - name: Build with MSBuild
-      run: msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /m
+    - name: Find MSBuild path
+      id: find-msbuild
+      run: |
+        echo "Looking for MSBuild..."
+        msbuildPath=$(vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)
+        echo "MSBuild found at: $msbuildPath"
+        echo "msbuild_path=$msbuildPath" >> $GITHUB_OUTPUT
 
+    - name: Build with MSBuild
+      run: |
+        "${{ steps.find-msbuild.outputs.msbuild_path }}" ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /m
+  
     - name: List build outputs
       run: dir Strype-ScriptCore\Strype-ScriptCore\bin\${{ env.BUILD_CONFIGURATION }}\net8.0\
 
