@@ -5,10 +5,15 @@ namespace Strype
 {
     public class Object
     {
-        internal Object(UInt32 id, UInt64 assetH) => ID = id;
+        protected Object() { ID = 0; Handle = 0; }
+        internal Object(uint id, ulong assetH)
+        {
+            ID = id;
+            Handle = assetH;
+        }
 
-        public readonly UInt32 ID;
-        public readonly UInt64 Handle;
+        public readonly uint ID;
+        public readonly ulong Handle;
 
         protected virtual void OnCreate() { }
         protected virtual void OnUpdate(float ts) { }
