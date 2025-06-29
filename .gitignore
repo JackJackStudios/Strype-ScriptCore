@@ -3,3 +3,6 @@ build/
 **.sln
 **.csproj
 **.vcxproj
+obj
+bin
+.vs
