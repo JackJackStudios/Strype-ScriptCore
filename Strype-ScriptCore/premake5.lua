@@ -7,13 +7,13 @@ project "Strype-ScriptCore"
 	language "C#"
 	dotnetframework "net8.0"
 	clr "Unsafe"
-    targetdir("../bin")
-    objdir("../bin")
+    targetdir "../bin"
+    objdir "../bin"
 
 	links {
 		"Coral.Managed"
 	}
 
 	files {
-		"/Source/**.cs",
+		"Source/**.cs",
 	}
