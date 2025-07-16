@@ -6,10 +6,10 @@ namespace Strype
     public class Object
     {
         protected Object() { ID = 0; Handle = 0; }
-        internal Object(uint id, ulong assetH)
+        internal Object(uint id, ulong handle)
         {
             ID = id;
-            Handle = assetH;
+            Handle = handle;
         }
 
         public readonly uint ID;
@@ -18,9 +18,7 @@ namespace Strype
         protected virtual void OnCreate() { }
         protected virtual void OnUpdate(float ts) { }
         protected virtual void OnDestroy() { }
-
-        public void Destroy(Object other) => Room.DestroyObject(other);
-
+        
         public Vector2 Position
         {
             get
