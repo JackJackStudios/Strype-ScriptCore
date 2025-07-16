@@ -15,5 +15,5 @@ project "Strype-ScriptCore"
 	}
 
 	files {
-		"/Source/**.cs",
+		"%{wks.location}/Strype-ScriptCore/Source/**.cs",
 	}
