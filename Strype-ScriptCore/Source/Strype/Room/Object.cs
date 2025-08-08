@@ -19,7 +19,33 @@ namespace Strype
         protected virtual void OnUpdate(float ts) { }
         protected virtual void OnDestroy() { }
         
-        public Vector2 Position
+        public float X 
+        { 
+            get
+            {
+                return Position.X;
+            }
+
+            set
+            {
+                Position = new Vector2(value, Y);
+            }
+        }
+
+        public float Y
+        {
+            get
+            {
+                return Position.Y;
+            }
+
+            set
+            {
+                Position = new Vector2(X, value);
+            }
+        }
+
+        private Vector2 Position
         {
             get
             {
@@ -34,7 +60,33 @@ namespace Strype
             }
         }
 
-        public Vector2 Scale
+        public float ScaleX 
+        { 
+            get
+            {
+                return Scale.X;
+            }
+
+            set
+            {
+                Scale = new Vector2(value, ScaleY);
+            }
+        }
+
+        public float ScaleY
+        {
+            get
+            {
+                return Scale.Y;
+            }
+
+            set
+            {
+                Scale = new Vector2(ScaleX, value);
+            }
+        }
+
+        private Vector2 Scale
         {
             get
             {
