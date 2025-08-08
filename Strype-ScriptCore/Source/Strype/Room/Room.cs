@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 namespace Strype
 {
+    public class Camera
+    {
+        public static void Move(Vector2 pos)
+        {
+            unsafe { InternalCalls.Camera_Move(&pos); }
+        }
+    }
+
     public class Room
     {
         public static Object CreateObject(float x, float y, Object obj)
