@@ -9,6 +9,11 @@ namespace Strype
         {
             unsafe { InternalCalls.Camera_Move(&pos); }
         }
+
+        public static void Zoom(float zoomlevel)
+        {
+            unsafe { InternalCalls.Camera_Zoom(&zoomlevel); }
+        }
     }
 
     public class Room
