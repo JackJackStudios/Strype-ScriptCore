@@ -45,7 +45,7 @@ namespace Strype
             }
         }
 
-        private Vector2 Position
+        public Vector2 Position
         {
             get
             {
@@ -86,7 +86,7 @@ namespace Strype
             }
         }
 
-        private Vector2 Scale
+        public Vector2 Scale
         {
             get
             {
