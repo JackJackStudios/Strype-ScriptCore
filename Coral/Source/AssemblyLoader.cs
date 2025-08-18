@@ -173,24 +173,26 @@ public static class AssemblyLoader
 				return -1;
 			}
 
-			if (!File.Exists(InAssemblyFilePath))
+            var fileName = Path.GetFileName(InAssemblyFilePath);
+
+            if (!File.Exists(InAssemblyFilePath))
 			{
-				LogMessage($"Failed to load assembly '{InAssemblyFilePath}', file not found.", MessageLevel.Error);
+				LogMessage($"File not found \"{InAssemblyFilePath}\" ", MessageLevel.Error);
 				s_LastLoadStatus = AssemblyLoadStatus.FileNotFound;
 				return -1;
 			}
 
 			if (!s_AssemblyContexts.TryGetValue(InContextId, out var alc))
 			{
-				LogMessage($"Failed to load assembly '{InAssemblyFilePath}', couldn't find AssemblyLoadContext with id {InContextId}.", MessageLevel.Error);
+				LogMessage($"Failed to load assembly \"{fileName}\" ", MessageLevel.Error);
 				s_LastLoadStatus = AssemblyLoadStatus.UnknownError;
 				return -1;
 			}
 
 			if (alc == null)
-			{
-				LogMessage($"Failed to load assembly '{InAssemblyFilePath}', AssemblyLoadContext with id {InContextId} was null.", MessageLevel.Error);
-				s_LastLoadStatus = AssemblyLoadStatus.UnknownError;
+            {
+                LogMessage($"Failed to load assembly \"{fileName}\" ", MessageLevel.Error);
+                s_LastLoadStatus = AssemblyLoadStatus.UnknownError;
 				return -1;
 			}
 
@@ -202,7 +204,7 @@ public static class AssemblyLoader
 				assembly = alc.LoadFromStream(stream);
 			}
 
-			LogMessage($"Loading assembly '{InAssemblyFilePath}'", MessageLevel.Info);
+			LogMessage($"Loading assembly \"{fileName}\" ", MessageLevel.Info);
 			var assemblyName = assembly.GetName();
 			int assemblyId = assemblyName.Name!.GetHashCode();
 			s_AssemblyCache.Add(assemblyId, assembly);
