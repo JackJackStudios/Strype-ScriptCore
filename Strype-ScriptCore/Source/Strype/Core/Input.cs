@@ -51,6 +51,27 @@ namespace Strype
             unsafe { InternalCalls.Input_GetMousePosition(&position); }
             return position;
         }
+
+        public static bool IsVerbPressed(string verb)
+        {
+            unsafe { return InternalCalls.Input_IsVerbPressed(verb); }
+        }
+
+        public static bool IsVerbHeld(string verb)
+        {
+            unsafe { return InternalCalls.Input_IsVerbHeld(verb); }
+        }
+
+        public static bool IsVerbDown(string verb)
+        {
+            unsafe { return InternalCalls.Input_IsVerbDown(verb); }
+        }
+
+        public static bool IsVerbReleased(string verb)
+        {
+            unsafe { return InternalCalls.Input_IsVerbReleased(verb); }
+        }
+
     }
 
 }

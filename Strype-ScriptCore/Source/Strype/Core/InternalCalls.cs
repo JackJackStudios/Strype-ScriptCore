@@ -19,6 +19,11 @@ namespace Strype
         internal static delegate* unmanaged<uint, float*, void> Object_SetRotation;
         internal static delegate* unmanaged<uint, Vector2*, void> Object_GetScale;
         internal static delegate* unmanaged<uint, Vector2*, void> Object_SetScale;
+        
+        internal static delegate* unmanaged<NativeString, Bool32> Input_IsVerbPressed;
+        internal static delegate* unmanaged<NativeString, Bool32> Input_IsVerbHeld;
+        internal static delegate* unmanaged<NativeString, Bool32> Input_IsVerbDown;
+        internal static delegate* unmanaged<NativeString, Bool32> Input_IsVerbReleased;
 
         internal static delegate* unmanaged<KeyCode, Bool32> Input_IsKeyPressed;
         internal static delegate* unmanaged<KeyCode, Bool32> Input_IsKeyHeld;
