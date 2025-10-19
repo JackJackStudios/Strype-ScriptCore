@@ -72,6 +72,12 @@ namespace Strype
             unsafe { return InternalCalls.Input_IsVerbReleased(verb); }
         }
 
+        public static Vector2 GetAxis(string left_verb, string right_verb, string up_verb, string down_verb)
+        {
+            return new Vector2((IsVerbHeld(right_verb) ? 1f : 0f) - (IsVerbHeld(left_verb) ? 1f : 0f),
+                           (IsVerbHeld(down_verb) ? 1f : 0f) - (IsVerbHeld(up_verb) ? 1f : 0f));
+        }
+
     }
 
 }
