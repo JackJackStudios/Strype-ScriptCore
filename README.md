@@ -6,5 +6,7 @@ See lastest version of this repository in Releases.
 
 ## Techinal information 
 • Coral/ is the C# side of the library (Coral) used for .NET runtime communication.
+
 • See Strype/Core/InternalCalls for functions that connect directly to engine-side
+
 • Project is built with premake + (**premake supported formats**)
