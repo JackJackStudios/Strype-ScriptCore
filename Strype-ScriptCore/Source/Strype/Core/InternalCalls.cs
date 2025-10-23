@@ -1,6 +1,5 @@
-﻿using Coral.Managed.Interop;
-using System;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
+﻿using System;
+using Coral.Managed.Interop;
 
 #pragma warning disable CS0649
 
@@ -12,6 +11,9 @@ namespace Strype
         internal static delegate* unmanaged<uint, void> Room_DestroyObject;
         internal static delegate* unmanaged<Vector2*, void> Camera_Move;
         internal static delegate* unmanaged<float*, void> Camera_Zoom;
+
+        internal static delegate* unmanaged<NativeString, void> Audio_PlaySound;
+        internal static delegate* unmanaged<NativeString, Vector2*, void> Audio_PlaySoundOn;
 
         internal static delegate* unmanaged<uint, Vector2*, void> Object_GetPosition;
         internal static delegate* unmanaged<uint, Vector2*, void> Object_SetPosition;
