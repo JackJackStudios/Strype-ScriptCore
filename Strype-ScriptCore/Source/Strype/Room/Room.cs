@@ -31,5 +31,10 @@ namespace Strype
             unsafe { InternalCalls.Room_DestroyObject(obj.ID); }
         }
 
+        public static void TransitionRoom(string room)
+        {
+            unsafe { InternalCalls.Room_TransitionRoom(room); }
+        }
+
     }
 }
