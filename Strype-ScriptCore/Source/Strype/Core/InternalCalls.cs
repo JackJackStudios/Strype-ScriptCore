@@ -9,6 +9,7 @@ namespace Strype
     {
         internal static delegate* unmanaged<float, float, ulong, uint> Room_CreateObject;
         internal static delegate* unmanaged<uint, void> Room_DestroyObject;
+        internal static delegate* unmanaged<NativeString, IntPtr> Room_GetManager;
         internal static delegate* unmanaged<NativeString, void> Room_TransitionRoom;
         internal static delegate* unmanaged<Vector2*, void> Camera_Move;
         internal static delegate* unmanaged<float*, void> Camera_Zoom;

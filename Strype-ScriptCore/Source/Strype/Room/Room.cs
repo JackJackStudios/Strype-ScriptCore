@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Strype
 {
@@ -35,6 +36,15 @@ namespace Strype
         {
             unsafe { InternalCalls.Room_TransitionRoom(room); }
         }
+
+        public static T GetManager<T>() where T : Manager
+        {
+            unsafe {
+                IntPtr handle = InternalCalls.Room_GetManager(typeof(T).Name);
+                return (T)GCHandle.FromIntPtr(handle).Target!;
+            }
+        }
+
 
     }
 }
