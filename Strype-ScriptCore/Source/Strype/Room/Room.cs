@@ -26,9 +26,6 @@ namespace Strype
 
         public static void DestroyObject(Object obj)
         {
-            if (obj == null)
-                return;
-
             unsafe { InternalCalls.Room_DestroyObject(obj.ID); }
         }
 
@@ -37,6 +34,20 @@ namespace Strype
             unsafe { InternalCalls.Room_TransitionRoom(room); }
         }
 
+        public static void DispatchEvent<T>(params object[] parameters) where T : Event
+        {
+            Type type = typeof(T);
+            var evt = (T)Activator.CreateInstance(type, parameters);
+
+            unsafe
+            {
+                IntPtr evtPtr = (IntPtr)GCHandle.Alloc(evt);
+                InternalCalls.Room_DispatchEvent(evtPtr, type.FullName!);
+
+                GCHandle.FromIntPtr(evtPtr).Free();
+            }
+        }
+        
         public static T GetManager<T>() where T : Manager
         {
             unsafe {

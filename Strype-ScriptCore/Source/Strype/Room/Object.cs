@@ -17,6 +17,7 @@ namespace Strype
 
         protected virtual void OnCreate() { }
         protected virtual void OnUpdate(float ts) { }
+        protected virtual void OnEvent(Event e) { }
         protected virtual void OnDestroy() { }
         
         public float X 
