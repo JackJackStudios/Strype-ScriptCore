@@ -36,16 +36,7 @@ namespace Strype
 
         public static void DispatchEvent<T>(params object[] parameters) where T : Event
         {
-            Type type = typeof(T);
-            var evt = (T)Activator.CreateInstance(type, parameters);
-
-            unsafe
-            {
-                IntPtr evtPtr = (IntPtr)GCHandle.Alloc(evt);
-                InternalCalls.Room_DispatchEvent(evtPtr, type.FullName!);
-
-                GCHandle.FromIntPtr(evtPtr).Free();
-            }
+            unsafe { InternalCalls.Room_DispatchEvent(typeof(T).Name!); }
         }
         
         public static T GetManager<T>() where T : Manager
