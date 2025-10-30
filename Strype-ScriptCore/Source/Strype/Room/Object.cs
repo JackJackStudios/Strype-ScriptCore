@@ -1,5 +1,6 @@
 ﻿using Coral.Managed.Interop;
 using System;
+using System.Runtime.InteropServices;
 
 namespace Strype
 {
@@ -20,6 +21,11 @@ namespace Strype
         protected virtual void OnEvent(Event e) { }
         protected virtual void OnDestroy() { }
         
+        private void InternalOnEvent(IntPtr handle)
+        {
+            OnEvent((Event)GCHandle.FromIntPtr(handle).Target!);
+        }
+
         public float X 
         { 
             get
